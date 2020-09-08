@@ -12,7 +12,7 @@ function createFeatures(earthquakeData) {
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the earthquake
   function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3>" + feature.properties.time +
+    layer.bindPopup("<h3>" + feature.properties.place +
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
   }
 
@@ -25,10 +25,44 @@ function createFeatures(earthquakeData) {
   // Sending our earthquakes layer to the createMap function
   createMap(earthquakes);
 }
+// // Loop through the cities array and create one marker for each city object
+// for (var i = 0; i < countries.length; i++) {
 
+//   // Conditionals for countries points
+//   var color = "";
+//   if (countries[i].points > 200) {
+//     color = "yellow";
+//   }
+//   else if (countries[i].points > 100) {
+//     color = "blue";
+//   }
+//   else if (countries[i].points > 90) {
+//     color = "green";
+//   }
+//   else {
+//     color = "red";
+//   }
+
+//   // Add circles to map
+//   L.circle(countries[i].location, {
+//     fillOpacity: 0.75,
+//     color: "white",
+//     fillColor: color,
+//     // Adjust radius
+//     radius: countries[i].points * 1500
+//   }).bindPopup("<h1>" + countries[i].name + "</h1> <hr> <h3>Points: " + countries[i].points + "</h3>").addTo(myMap);
+// }
 function createMap(earthquakes) {
 
   // Define streetmap and darkmap layers
+  var streets =  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution:  "Map data &copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+   tileSize: 512,
+   maxZoom: 19,
+   zoomOffset: -1,
+   id: "mapbox/streets-v11",
+   accessToken: API_KEY
+})
   var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
@@ -47,6 +81,7 @@ function createMap(earthquakes) {
   
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
+    "Street Map": streets,
     "Satellite Map": satellite,
     "Dark Map": darkmap
   };
@@ -62,7 +97,7 @@ function createMap(earthquakes) {
       37.09, -95.71
     ],
     zoom: 5,
-    layers: [satellite, earthquakes]
+    layers: [streets, earthquakes]
   });
 
   // Create a layer control
