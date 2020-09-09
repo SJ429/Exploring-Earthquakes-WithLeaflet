@@ -6,7 +6,32 @@ d3.json(queryUrl, function(data) {
   // Once there is a response, send the data.features object to the createFeatures function
     createFeatures(data.features);
 });
-
+// Define a circleSize function that will give each size magnitude of the earthquake in each location
+function circleSize(magnitude) {
+  return magnitude*3;
+  }
+   // Create function to set the color for different magnitude
+function getColor(magnitude) {
+  // Conditionals for magnitude
+  if (magnitude > 5) {
+    return "darkred";
+  }
+  else if (magnitude > 4) {
+    return "red";
+  }
+  else if (magnitude > 3) {
+   return "darkorange";
+  }
+  else if (magnitude > 2) {
+    return "green";
+  }
+  else if (magnitude > 1) {
+    return "yellowgreen";
+  }
+  else {
+    return "yellow";
+  }
+};
 function createFeatures(earthquakeData) {
 
   function onEachLayer(feature) {
@@ -76,8 +101,8 @@ function createMap(earthquakes) {
     Earthquakes: earthquakes
   };
 
-  // Create map and give the map and earthquakes layers to display on load
-  var myMap = L.map("map", {
+// Create map and give the map and earthquakes layers to display on load
+   var myMap = L.map("map", {
     center: [
       37.09, -95.71
     ],
@@ -85,37 +110,27 @@ function createMap(earthquakes) {
     layers: [streets, earthquakes]
   });
 
-  // Create a layer control
-  // Pass in the baseMaps and overlayMaps
-  // Add the layer control to the map
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(myMap);
-}
-// Create function to set the color for different magnitude
-function getColor(magnitude) {
-  // Conditionals for magnitude
-  if (magnitude >= 5) {
-    return "darkred";
-  }
-  else if (magnitude >= 4) {
-    return "red";
-  }
-  else if (magnitude >= 3) {
-   return "darkorange";
-  }
-  else if (magnitude >= 2) {
-    return "yellow";
-  }
-  else if (magnitude >= 1) {
-    return "yellowgreen";
-  }
-  else {
-    return "green";
-  }
-};
+//Create and add legend
+    var legend = L.control({position: "bottomright"});
 
-// Define a circleSize function that will give each size magnitude of the earthquake in each location
-function circleSize(magnitude) {
-return magnitude*3;
+    legend.onAdd = function() {
+
+      var div = L.DomUtil.create("div", "info legend");
+        colors = [0,1,2,3,4,5,6];
+        //colors = ['yellow', 'yellowgreen','green', 'darkorange', 'red', 'darkred'];
+        for (var i = 0; i < colors.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(colors[i]) + '"></i> ' +
+                (colors[i] ? colors[i] + '<br>' : '');
+        }
+        return div;
+      };
+    legend.addTo(myMap);
+
+      // Create a layer control
+      // Pass in the baseMaps and overlayMaps
+      // Add the layer control to the map
+      L.control.layers(baseMaps, overlayMaps, {
+        collapsed: false
+      }).addTo(myMap);
 }
