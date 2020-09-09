@@ -117,11 +117,13 @@ function createMap(earthquakes) {
 
       var div = L.DomUtil.create("div", "info legend");
         colors = [0,1,2,3,4,5,6];
+        labels= []
+        div.innerHTML += "<h6 style='margin:1px'>Magnitude</h6>"
         //colors = ['yellow', 'yellowgreen','green', 'darkorange', 'red', 'darkred'];
         for (var i = 0; i < colors.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + getColor(colors[i]) + '"></i> ' +
-                (colors[i] ? colors[i] + '<br>' : '');
+                (colors[i] ? colors[i] + '&ndash;'+ colors[i +1] + '<br>' : '');
         }
         return div;
       };
