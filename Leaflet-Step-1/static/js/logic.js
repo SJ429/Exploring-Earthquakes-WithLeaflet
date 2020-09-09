@@ -2,7 +2,7 @@
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson"
   console.log(queryUrl)
 
-var plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_plates.json"
+// var plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_plates.json"
 
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
@@ -23,10 +23,10 @@ function getColor(magnitude) {
     return "red";
   }
   else if (magnitude > 3) {
-   return "darkorange";
+   return "green";
   }
   else if (magnitude > 2) {
-    return "green";
+    return "orange";
   }
   else if (magnitude > 1) {
     return "yellowgreen";
@@ -122,7 +122,7 @@ function createMap(earthquakes) {
         colors = [0,1,2,3,4,5,6];
         labels= []
         div.innerHTML += "<h6 style='margin:1px'>Magnitude</h6>"
-        //colors = ['yellow', 'yellowgreen','green', 'darkorange', 'red', 'darkred'];
+        //colors = ['yellow', 'yellowgreen','orange', 'green', 'red', 'darkred'];
         for (var i = 0; i < colors.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + getColor(colors[i]) + '"></i> ' +
