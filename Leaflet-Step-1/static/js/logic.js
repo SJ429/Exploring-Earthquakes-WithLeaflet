@@ -1,6 +1,9 @@
 // Store API endpoint inside queryUrl
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson"
   console.log(queryUrl)
+
+var plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_plates.json"
+
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
   // Once there is a response, send the data.features object to the createFeatures function
