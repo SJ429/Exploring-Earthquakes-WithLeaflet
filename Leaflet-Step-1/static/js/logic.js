@@ -2,8 +2,6 @@
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson"
   console.log(queryUrl)
 
-// var plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_plates.json"
-
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
   // Once there is a response, send the data.features object to the createFeatures function
@@ -92,6 +90,8 @@ function createMap(earthquakes) {
     accessToken: API_KEY
   });
   
+  var faultLine =new L.LayerGroup();
+
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
     "Street Map": streets,
@@ -101,16 +101,30 @@ function createMap(earthquakes) {
 
   // Create overlay object to hold our overlay layer
   var overlayMaps = {
-    Earthquakes: earthquakes
+    Earthquakes: earthquakes,
+    FaultLine: faultLine
   };
-
+  
+  // Query to retrieve the faultline data
+  //https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json
+  var plates = "data/PB2002_boundaries.json";
+  
+  // Create the faultlines and add them to the faultline layer
+  d3.json(plates, function(data) {
+    L.geoJSON(data, {
+      style: function() {
+        return {color: "blue"}
+      }
+    }).addTo(faultLine)
+  })
+  
 // Create map and give the map and earthquakes layers to display on load
    var myMap = L.map("map", {
     center: [
       37.09, -95.71
     ],
     zoom: 5,
-    layers: [streets, earthquakes]
+    layers: [streets, earthquakes, faultLine]
   });
 
 //Create and add legend
