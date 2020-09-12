@@ -11,9 +11,9 @@ d3.json(queryUrl, function(data) {
 function circleSize(magnitude) {
   return magnitude*3;
   }
-   // Create function to set the color for different magnitude
+
+   // Create function to set the color with conditional for different magnitude
 function getColor(magnitude) {
-  // Conditionals for magnitude
   if (magnitude > 5) {
     return "darkred";
   }
@@ -33,19 +33,19 @@ function getColor(magnitude) {
     return "yellow";
   }
 };
-function createFeatures(earthquakeData) {
 
+  // Define a function to run once for each feature in the features array
+function createFeatures(earthquakeData) {
   function onEachLayer(feature) {
     return new L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], {
       radius: circleSize(feature.properties.mag),
-      fillOpacity: 0.8,
+      fillOpacity: .75,
       color: getColor(feature.properties.mag),
       fillColor: getColor(feature.properties.mag)
     });
   }
 
-  // Define a function to run once for each feature in the features array
-  // Give each feature a popup to describe the magnitude, place and time of the earthquake
+  // Give each feature a popup when hover to describe the magnitude, place and time of the earthquake when hover
   function onEachFeature(feature, layer) {
     layer.bindTooltip("<h3>" + feature.properties.place +
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p><hr><p>" + feature.properties.mag + "</p>");
@@ -82,30 +82,30 @@ function createMap(earthquakes) {
     id: "mapbox/satellite-v9",
     accessToken: API_KEY
   });
-
   var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
     id: "dark-v10",
     accessToken: API_KEY
   });
-  
+
+  // Create a layer to contain the faultline
   var faultLine =new L.LayerGroup();
 
-  // Define a baseMaps object to hold our base layers
+  // Define a baseMaps object to hold base layers
   var baseMaps = {
     "Street Map": streets,
     "Satellite Map": satellite,
     "Dark Map": darkmap
   };
 
-  // Create overlay object to hold our overlay layer
+  // Create overlay object to hold the overlay layer
   var overlayMaps = {
     Earthquakes: earthquakes,
     FaultLine: faultLine
   };
   
-  // Query to retrieve the faultline data
+  // Retrieve the faultline data from link
   //https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json
   var plates = "data/PB2002_boundaries.json";
   
@@ -129,18 +129,16 @@ function createMap(earthquakes) {
 
 //Create and add legend
     var legend = L.control({position: "bottomright"});
-
     legend.onAdd = function() {
-
       var div = L.DomUtil.create("div", "info legend");
         colors = [0,1,2,3,4,5,6];
         labels= []
-        div.innerHTML += "<p style='margin:1px'>Magnitude</p>"
+        div.innerHTML += "<p style='margin:1px'> magnitude </p>"
         //colors = ['yellow', 'yellowgreen','orange', 'green', 'red', 'darkred'];
         for (var i = 1; i < colors.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + getColor(colors[i]) + '"></i> ' +
-                (colors[i] ? colors[i] + '&ndash;'+ colors[i +1] + '<br>' : '');
+                (colors[i] ? colors[i] + '<br>' : '');
         }
         return div;
       };
