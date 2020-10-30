@@ -9,5 +9,5 @@ The JavaScript file "logic.js" pulled in the json data and generated maps using 
 Each circle represents an earthquake and the size and color reflect the magnitude of the earthquake. The maps display the relationship between tectonic plates and seismic activity. Thus, a second data set from the tectonic plates from https://github.com/fraxen/tectonicplates was used for visualization.
 
 Leaflet was used to create base maps to choose from as well as separated out two different data sets into overlays that can be turned on and off independently with layer controls.
-Maps are hoseted at https://sj429.github.io/leaflet-challenge/
+Maps are hoseted athttps://sj429.github.io/Exploring-Earthquakes-WithLeaflet/
 
