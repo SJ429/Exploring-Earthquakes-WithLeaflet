@@ -4,7 +4,7 @@ The United States Geological Survey, or USGS for short is responsible for provid
  
 This project pulled earthquake data from the USGS website. 
 ![Image of Earthquakes](/images/Capture faultline final.png)
-Format:![/images/Capture faultline final.png](url)
+Format:![../images/Capture faultline final.png](url)
 
 
 
