@@ -4,7 +4,7 @@ The United States Geological Survey, or USGS for short is responsible for provid
  
 This project pulled earthquake data from the USGS website. 
 
-![](Leaflet-Step-1/Images/Capture%faultline%final.PNG)
+![](Leaflet-Step-1/Images/Capture%20faultline%20final.PNG)
 
 The JavaScript file "logic.js" pulled in the json data and generated maps using Leaflet and mapbox. The dataset selected was all earthquakes for the past seven days, specifically, https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson.
 
