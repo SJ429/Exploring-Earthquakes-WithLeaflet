@@ -10,7 +10,7 @@ Each circle represents an earthquake and the size and color reflect the magnitud
 
 ![](Leaflet-Step-1/Images/Capture%20faultline%20final.PNG)
 
-Maps are hoseted at https://sj429.github.io/Exploring-Earthquakes-WithLeaflet/
+Maps with the relationships are hosted at https://sj429.github.io/Exploring-Earthquakes-WithLeaflet/
 
 
 The dataset selected was all earthquakes for the past seven days, specifically, https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson.
