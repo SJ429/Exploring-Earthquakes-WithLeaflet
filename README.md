@@ -4,8 +4,6 @@ The United States Geological Survey, or USGS for short is responsible for provid
  
 This project pulled earthquake data from the USGS website. 
 
-![](images/Capture%faultline%final.png)
-
 The JavaScript file "logic.js" pulled in the json data and generated maps using Leaflet and mapbox. The dataset selected was all earthquakes for the past seven days, specifically, https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_day.geojson.
 
 Each circle represents an earthquake and the size and color reflect the magnitude of the earthquake. The maps display the relationship between tectonic plates and seismic activity. Thus, a second data set from the tectonic plates from https://github.com/fraxen/tectonicplates was used for visualization.
