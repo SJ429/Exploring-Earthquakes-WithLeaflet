@@ -1,6 +1,6 @@
 # Earthquakes
  
-This project pulled earthquake data from the USGS website and looked at the relationship between tectonic plates and seismic activity.  
+The purpose of this assignment was to use earthquake data from the USGS website and looked at the relationship between tectonic plates and seismic activity.  
  
 Leaflet was used to create base maps to choose from as well as separated out two different data sets into overlays that can be turned on and off independently with layer controls.
 
