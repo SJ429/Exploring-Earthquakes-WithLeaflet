@@ -21,6 +21,8 @@ Each circle represents an earthquake's size and the magnitude of the earthquake.
 ![](Leaflet-Step-1/Images/Capture%20faultline%20final.PNG)
 
 
+
+
 Maps with the relationships are hosted at https://sj429.github.io/Exploring-Earthquakes-WithLeaflet/
 
 
