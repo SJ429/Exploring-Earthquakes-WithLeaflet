@@ -27,6 +27,5 @@ Maps with the relationships are hosted at https://sj429.github.io/Exploring-Eart
 
 
 
-Python, HTML, CSS, and Bootstrap.
-
+Languages and technologies used included JavaScript, Python, HTML, CSS, and Bootstrap.
 
